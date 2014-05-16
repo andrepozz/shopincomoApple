@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.shopincomo.shopincomo" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>ShopInComo</name>
+    <name>IphoneTest</name>
     <description>
-				Vieni a scoprire lo shopping a Como
+				test
     </description>
     <author email="" href="http://www.polimi.it">
         Politecnico di Milano - Dipartimento di Elettronica, Informazione e Bioingegneria
