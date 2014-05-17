@@ -42,61 +42,71 @@
 	
 	<script>
 	$( "#download" ).on( "pagebeforeshow", function() {	
+        var g_overlay = false;
+        var g_color = "white";
+	});
 	
-		function showStatusBar(show) {
-		            	if (show) {
-		            		StatusBar.show();
-		                	StatusBar.overlaysWebView(g_overlay)
-		            	}
-		            	else
-		                	StatusBar.hide();
-		        	}
-        
-		        	function overlayWebView(isOverlay) {
-		            	g_overlay = isOverlay;
-		            	StatusBar.overlaysWebView(g_overlay);
-		        	}
-        
-		        	function setColor(inColor) {
-		            	g_color = inColor
-		            	StatusBar.backgroundColorByName(g_color);
-        
-		            	if (g_color === "black")
-		                	StatusBar.styleLightContent();
-		        	}
-
-		        	function defaultStyle() {
-		            	g_color = "white"
-		            	StatusBar.styleDefault();
-		            	StatusBar.backgroundColorByName(g_color);
-		        	}
-        
-		        	function lightContent() {
-		            	StatusBar.styleLightContent();
-		            	if (g_color === "white") {
-		                	g_color = "black";
-		                	StatusBar.backgroundColorByName(g_color);
-		            	}
-		        	}
+	$(document).on("click", '.hide', function(){
 	
+        var g_overlay = false;
+        var g_color = "white";
+		StatusBar.hide();
+	});
 	
+	$(document).on("click", '.show', function(){
+        var g_overlay = false;
+        var g_color = "white";
+		StatusBar.show();
+	
+	});
+	
+	$(document).on("click", '.color', function(){
+		
+        var g_overlay = false;
+        var g_color = "white";
+	});
+	
+	$(document).on("click", '.overlay', function(){
+		StatusBar.overlaysWebView(true);
+        var g_overlay = false;
+        var g_color = "white";
+	});
+	
+	$(document).on("click", '.notoverlay', function(){
+        var g_overlay = false;
+        var g_color = "white";
+		StatusBar.overlaysWebView(false);
+	
+	});
+	
+	$(document).on("click", '.light', function(){
+        var g_overlay = false;
+        var g_color = "white";
+		StatusBar.styleLightContent();
+	
+	});
+	
+	$(document).on("click", '.default', function(){
+	
+        var g_overlay = false;
+        var g_color = "white";
+		StatusBar.styleDefault();
 	});
 	
 	
 	</script>
 			
-	<p><a href="#" onclick="showStatusBar(false); return false;">Hide Status Bar</a></p>
-	<p><a href="#" onclick="showStatusBar(true); return false;">Show Status Bar</a></p>
+	<p><a href="#" class="hide" >Hide Status Bar</a></p>
+	<p><a href="#" class="show" >Show Status Bar</a></p>
 
-	<p><a href="#" onclick="setColor('red'); return false;">Red Status Bar</a></p>
-	<p><a href="#" onclick="setColor('blue'); return false;">Blue Status Bar</a></p>
-	<p><a href="#" onclick="setColor('black'); return false;">Black Status Bar</a></p>
+	<p><a href="#" class="color" >Red Status Bar</a></p>
 
-    <p><a href="#" onclick="overlayWebView(true); return false;">Status Bar Overlays WebView</a></p>
-    <p><a href="#" onclick="overlayWebView(false); return false;">Status Bar sits above WebView</a></p>
 
-    <p><a href="#" onclick="lightContent(); return false;">Light Content Status Bar</a></p>
-    <p><a href="#" onclick="defaultStyle(); return false;">Default Status Bar Style</a></p>
+    <p><a href="#" class="overlay" >Status Bar Overlays WebView</a></p>
+    <p><a href="#" class="notoverlay" >Status Bar sits above WebView</a></p>
+
+    <p><a href="#" class="light" >Light Content Status Bar</a></p>
+    <p><a href="#" class="defult" >Default Status Bar Style</a></p>
 	
 	
 	</div><!-- /content -->
