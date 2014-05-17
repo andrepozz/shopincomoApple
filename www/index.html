@@ -43,84 +43,60 @@
 	<script>
 	$( "#download" ).on( "pagebeforeshow", function() {	
 	
-	});
-	
-	$(document).on("click", 'button.download', function(){
-	
-	codLingua = "it"; //$(this).attr('codiceLingua');
-	
-	var urlCategorie = encodeURI("http://www.wificomo.com/ccn20/JSONcategorie.php?language="+codLingua+"");	
-	var fileNameCategorie = "categorie.js";
-	
-		var fileTransfer = new FileTransfer();
-			
-		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-			
-			fileSystem.root.getDirectory("ccn", {create: true, exclusive: false}, function(dirEntry) {
-			
-				dirEntry.getFile(fileNameCategorie, {create: true, exclusive: false}, function(fileEntry) {
-										
-					var localPath = fileEntry.fullPath;
-					
-					console.log("localPath " + localPath);
-					console.log("device.platform " + device.platform);
-					alert("localPath " + localPath);
-					alert("device.platform " + device.platform);
+		function showStatusBar(show) {
+		            	if (show) {
+		            		StatusBar.show();
+		                	StatusBar.overlaysWebView(g_overlay)
+		            	}
+		            	else
+		                	StatusBar.hide();
+		        	}
+        
+		        	function overlayWebView(isOverlay) {
+		            	g_overlay = isOverlay;
+		            	StatusBar.overlaysWebView(g_overlay);
+		        	}
+        
+		        	function setColor(inColor) {
+		            	g_color = inColor
+		            	StatusBar.backgroundColorByName(g_color);
+        
+		            	if (g_color === "black")
+		                	StatusBar.styleLightContent();
+		        	}
 
-					if (device.platform === "Android" && localPath.indexOf("file://") === 0) {
-						localPath = localPath.substring(7);
-					}
-					
-					fileTransfer.download(
-						urlCategorie,
-						localPath,
-						
-						function(entry) {
-						
-								//MEMORIZZA PATH
-								var directory = dirEntry.fullPath;
-								var indexPath = directory.lastIndexOf("/");
-								var pathSD = directory.substr(7, indexPath-7);
-								pathSD = pathSD+"/ccn";
-								
-								console.log("directory " + directory);
-								console.log("indexPath " + indexPath);
-								console.log("pathSD " + pathSD);
-								alert("directory " + directory);
-								alert("indexPath " + indexPath);
-								alert("pathSD " + pathSD);
-
-						},
-						function(error) {
-							console.log("download error source " + error.source);
-							console.log("download error target " + error.target);
-							console.log("download error code " + error.code);
-						},
-						false,
-						{
-							headers: {
-								"Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
-							}
-						}
-				
-					); // end of fileTransfer.download
-				}); // end of dirEntry.getFile
-			
-			}); // fileSystem.root.getDirectory
-			
-		}); // end of window.requestFileSystem
-		
-		
-		
+		        	function defaultStyle() {
+		            	g_color = "white"
+		            	StatusBar.styleDefault();
+		            	StatusBar.backgroundColorByName(g_color);
+		        	}
+        
+		        	function lightContent() {
+		            	StatusBar.styleLightContent();
+		            	if (g_color === "white") {
+		                	g_color = "black";
+		                	StatusBar.backgroundColorByName(g_color);
+		            	}
+		        	}
+	
 	
 	});
 	
 	
 	</script>
-		
-	<button class="download">download</button>
-	
+			
+	<p><a href="#" onclick="showStatusBar(false); return false;">Hide Status Bar</a></p>
+	<p><a href="#" onclick="showStatusBar(true); return false;">Show Status Bar</a></p>
 
+	<p><a href="#" onclick="setColor('red'); return false;">Red Status Bar</a></p>
+	<p><a href="#" onclick="setColor('blue'); return false;">Blue Status Bar</a></p>
+	<p><a href="#" onclick="setColor('black'); return false;">Black Status Bar</a></p>
+
+    <p><a href="#" onclick="overlayWebView(true); return false;">Status Bar Overlays WebView</a></p>
+    <p><a href="#" onclick="overlayWebView(false); return false;">Status Bar sits above WebView</a></p>
+
+    <p><a href="#" onclick="lightContent(); return false;">Light Content Status Bar</a></p>
+    <p><a href="#" onclick="defaultStyle(); return false;">Default Status Bar Style</a></p>
 	
 	
 	</div><!-- /content -->
