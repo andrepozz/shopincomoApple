@@ -8,6 +8,7 @@
         Politecnico di Milano - Dipartimento di Elettronica, Informazione e Bioingegneria
     </author>
     <feature name="http://api.phonegap.com/1.0/device" />
+    <preference name="phonegap-version" value="3.6.3" />
     <preference name="permissions" value="none" />
     <preference name="orientation" value="portrait" />
     <preference name="target-device" value="universal" />
